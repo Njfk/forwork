@@ -1,0 +1,51 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="loading_style">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+    </style>
+    <style name="scan_dialog_style">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+    </style>
+
+    <style name="dialog_anim">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter_scale_0_100</item>
+        <item name="android:windowExitAnimation">@anim/dialog_enter_scale_100_0</item>
+    </style>
+    <style name="dialog_anim_r_to_l">
+        <item name="android:windowEnterAnimation">@anim/slide_r_to_l</item>
+        <item name="android:windowExitAnimation">@anim/slide_l_to_r</item>
+    </style>
+
+    <style name="dialong_window">
+        <item name="android:windowAnimationStyle">@style/dialog_anim</item>
+    </style>
+
+    <style name="dialg_anim">
+        <item name="android:windowEnterAnimation">@anim/scan_0_100</item>
+        <item name="android:windowExitAnimation">@anim/scan_100_0</item>
+    </style>
+    
+
+</resources>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">秀逗</string>
+    <string name="forwork">为工作而生</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="application_limit">申请额度</string>
+</resources>

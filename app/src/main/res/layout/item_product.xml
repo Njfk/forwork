@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dp_4"
+    android:gravity="center">
+    <ImageView
+        android:id="@+id/item_pro_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/pulltorefresh_anim"/>
+    <TextView
+        android:id="@+id/item_pro_name"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/sp_8"
+        android:maxWidth="@dimen/dp_100"
+        android:paddingTop="@dimen/dp_3"
+        android:maxLines="2"
+        android:textColor="@color/color_666"
+        android:ellipsize="end"
+        android:gravity="left"
+        />
+</LinearLayout>

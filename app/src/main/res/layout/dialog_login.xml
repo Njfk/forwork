@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:id="@+id/login_linear"
+        android:layout_width="@dimen/dp_222"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dialog"
+        android:layout_centerInParent="true"
+        android:padding="@dimen/dp_10"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:padding="@dimen/dp_8"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/title_yellow"
+            android:background="@drawable/edit_dialog"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/title_yellow"
+            android:padding="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_2"
+            android:textSize="@dimen/sp_12"
+            android:lines="1"
+            android:background="@drawable/edit_dialog"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/dp_8"
+            android:text="登 录"
+            android:textColor="@color/blue_2"
+            android:background="@drawable/edit_dialog"/>
+    </LinearLayout>
+
+</RelativeLayout>
