@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -63,6 +64,12 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
 
             imageViews.add(imageView);
         }
+        imageViews.get(2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toMain(0);
+            }
+        });
 
         splash_viewpager.setAdapter(new IndexBunnerAdapter(imageViews));
     }
@@ -71,7 +78,7 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
     public void initData() {
         String[] perms = {Manifest.permission.CAMERA};
         if (EasyPermissions.hasPermissions(this, perms)) {
-            toMain();
+//            toMain(3000);
         } else {
             EasyPermissions.requestPermissions(this, "camera", 0x11, perms);
         }
@@ -79,7 +86,7 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
 
     boolean isStart = false;
 
-    public void toMain() {
+    public void toMain(long time) {
         isStart = true;
         if (isStart) {
             handler.postDelayed(new Runnable() {
@@ -89,7 +96,7 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
                     startActivity(intent);
                     finish();
                 }
-            }, 3000);
+            }, time);
         }
     }
 
@@ -97,7 +104,7 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
-        toMain();
+//        toMain();
     }
 
     @Override
