@@ -2,7 +2,9 @@ package com.forwork.com.forwork.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
+import android.os.Handler;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,11 +12,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.InflateException;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,10 +29,13 @@ import android.view.animation.Animation;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.AbsListView;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 //import com.bumptech.glide.Glide;
@@ -40,6 +48,7 @@ import com.forwork.com.forwork.bean.base.Product;
 import com.forwork.com.forwork.net.ListApi;
 import com.forwork.com.forwork.net.presenter.ListApiPresenter;
 import com.forwork.com.forwork.net.view.IListView;
+import com.forwork.com.forwork.reader.MainActivity;
 import com.forwork.com.forwork.ui.adapter.IndexBunnerAdapter;
 import com.forwork.com.forwork.ui.adapter.IndexList1Adapter;
 import com.forwork.com.forwork.ui.adapter.IndexPageAdapter;
@@ -53,6 +62,7 @@ import com.forwork.com.forwork.utils.StatusBarUtils;
 import com.forwork.com.forwork.view.MarqueeTextView;
 import com.forwork.com.forwork.view.dialog.LoadingFragment;
 import com.forwork.com.forwork.view.refresh.MRefreshHeader;
+import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshKernel;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -60,6 +70,7 @@ import com.scwang.smartrefresh.layout.constant.RefreshState;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,6 +97,7 @@ public class IndexActivity extends BaseActivity implements IListView, View.OnCli
     Index1Fragment index1Fragment;
     Index2Fragment index2Fragment;
     Index3Fragment index3Fragment;
+    private String TAG = "index";
 
     @Override
     public int getLayoutId() {
@@ -104,6 +116,7 @@ public class IndexActivity extends BaseActivity implements IListView, View.OnCli
 
     @Override
     public void initView() {
+
 //
 //        showLoading();
 //
@@ -263,24 +276,10 @@ public class IndexActivity extends BaseActivity implements IListView, View.OnCli
         });
 
 
-
-
     }
 
     @Override
     public void initData() {
-//        listApiPresenter = new ListApiPresenter();
-//        listApiPresenter.attchView(this);
-//        listApiPresenter.getList1(list_page1);
-//
-//        //轮播公告
-//        String[] announcement = new String[]{
-//                "恭喜臭豆腐成功订购了一盒臭豆腐",
-//                "恭喜叉烧包成功订购了一盒三鹿奶粉",
-//                "恭喜张二狗成功充值100元",
-//                "恭喜王逗逗中了1000大奖"
-//        };
-//        index_marquee_text.initMarqueeTextView(announcement, null);
 
     }
 
@@ -293,7 +292,7 @@ public class IndexActivity extends BaseActivity implements IListView, View.OnCli
     @Override
     public void dismissDialog() {
         super.dismissLoading();
-       index1Fragment.onCompleteRefresh();
+        index1Fragment.onCompleteRefresh();
 
     }
 
@@ -315,7 +314,7 @@ public class IndexActivity extends BaseActivity implements IListView, View.OnCli
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.index_mall0:
                 index_mall0.setChecked(true);
                 index_viewpager.setCurrentItem(0);
@@ -339,20 +338,18 @@ public class IndexActivity extends BaseActivity implements IListView, View.OnCli
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.index_menu,menu);
-        return super.onCreateOptionsMenu(menu);
+    protected boolean onPrepareOptionsPanel(View view, Menu menu) {
+        if (menu != null) {
+            if (menu.getClass() == MenuBuilder.class) {
+                try {
+                    Method m = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
+                    m.setAccessible(true);
+                    m.invoke(menu, true);
+                } catch (Exception e) {
+                }
+            }
+        }
+        return super.onPrepareOptionsPanel(view, menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Log.e("22", "onOptionsItemSelected: ");
-        switch (item.getItemId()){
-            case R.id.item_index_scan:
-                ScanDialogFragment scanDialogFragment = ScanDialogFragment.newInstance();
-                scanDialogFragment.show(getSupportFragmentManager(),"");
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

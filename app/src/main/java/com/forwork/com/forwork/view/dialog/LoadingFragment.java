@@ -60,15 +60,15 @@ public class LoadingFragment extends DialogFragment {
 //        rotateAnimation.setDuration(500);
 //        imageView.startAnimation(rotateAnimation);
 
-        AnimationSet animationSet = new AnimationSet(false);
-        final RotateAnimation rotateAnimation = new RotateAnimation(45,341,Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        rotateAnimation.setRepeatCount(Animation.INFINITE);
-        rotateAnimation.setRepeatMode(Animation.REVERSE);
-        rotateAnimation.setDuration(1000);
+//        AnimationSet animationSet = new AnimationSet(false);
+//        final RotateAnimation rotateAnimation = new RotateAnimation(45,341,Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+//        rotateAnimation.setRepeatCount(Animation.INFINITE);
+//        rotateAnimation.setRepeatMode(Animation.REVERSE);
+//        rotateAnimation.setDuration(1000);
 
-        animationSet.addAnimation(rotateAnimation);
+//        animationSet.addAnimation(rotateAnimation);
 
-        imageView.startAnimation(animationSet);
+//        imageView.startAnimation(animationSet);
 
     }
 

@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +16,7 @@ import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -32,12 +34,14 @@ import com.forwork.com.forwork.bean.IndexBean1;
 import com.forwork.com.forwork.bean.base.Product;
 import com.forwork.com.forwork.net.presenter.ListApiPresenter;
 import com.forwork.com.forwork.net.view.IListView;
+import com.forwork.com.forwork.reader.MainActivity;
 import com.forwork.com.forwork.ui.activity.IndexActivity;
 import com.forwork.com.forwork.ui.activity.WebActivity;
 import com.forwork.com.forwork.ui.adapter.IndexBunnerAdapter;
 import com.forwork.com.forwork.ui.adapter.IndexList1Adapter;
 import com.forwork.com.forwork.ui.adapter.OnRecycleViewItemClick;
 import com.forwork.com.forwork.ui.base.LazyFragment;
+import com.forwork.com.forwork.ui.dialog.ScanDialogFragment;
 import com.forwork.com.forwork.view.MarqueeTextView;
 import com.forwork.com.forwork.view.PriceText;
 import com.forwork.com.forwork.view.refresh.MRefreshFooter;
@@ -79,6 +83,7 @@ public class Index1Fragment extends LazyFragment {
     ListApiPresenter listApiPresenter;
 
     IndexList1Adapter indexList1Adapter;
+    AppCompatActivity appCompatActivity;
 
     int list_page1 = 1;
     int list_total1 = 1;
@@ -103,6 +108,7 @@ public class Index1Fragment extends LazyFragment {
         // Inflate the layout for this fragment
         View inflate = inflater.inflate(R.layout.fragment_index1, container, false);
         ButterKnife.bind(this, inflate);
+        appCompatActivity = (AppCompatActivity) getActivity();
         iListView = (IListView) getActivity();
         isCreated = true;
         Log.e(TAG, "onCreateView: " + isCreated);
@@ -134,8 +140,8 @@ public class Index1Fragment extends LazyFragment {
 
         iListView.showDialog();
 
-        IndexActivity activity = (IndexActivity) getActivity();
-        activity.setSupportActionBar(index_toolbar);
+        setHasOptionsMenu(true);
+        appCompatActivity.setSupportActionBar(index_toolbar);
         //刷新事件
         index_refresh_layout.setRefreshHeader(new MRefreshHeader(getActivity()));
 //        index_refresh_layout.setRefreshFooter(new MRefreshFooter(getActivity()));
@@ -297,5 +303,34 @@ public class Index1Fragment extends LazyFragment {
         index_refresh_layout.finishLoadMore(1000);
     }
 
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.index_menu, menu);
+////        setMenubackgroudcolor();
+//        return super.onCreateOptionsMenu(menu);
+//    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.index_menu,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.e("22", "onOptionsItemSelected: ");
+        switch (item.getItemId()) {
+            case R.id.item_index_scan:
+                ScanDialogFragment scanDialogFragment = ScanDialogFragment.newInstance();
+                scanDialogFragment.show(getActivity().getSupportFragmentManager(), "");
+                break;
+            case R.id.item_index_read:
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }

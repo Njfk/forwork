@@ -4,7 +4,9 @@ import android.Manifest;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Handler;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,30 +26,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class SplashActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
+public class SplashActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
     Handler handler = new Handler();
     @BindView(R.id.splash_viewpager)
     ViewPager splash_viewpager;
 
+
     @Override
-    public int getLayoutId() {
-        return R.layout.activity_splash;
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
+        ButterKnife.bind(this);
+        initView();
+        initData();
     }
 
-    @Override
-    public void setToolbar() {
-
-    }
-
-    @Override
-    public void setStatusBar() {
-        StatusBarUtils.setColor(this, getResources().getColor(R.color.color_00c3e5));
-    }
-
-    @Override
     public void initView() {
+        StatusBarUtils.setColor(this, getResources().getColor(R.color.white));
         int[] imgs = new int[]{
                 R.drawable.navigation_1,
                 R.drawable.navigation_2,
@@ -74,13 +73,12 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
         splash_viewpager.setAdapter(new IndexBunnerAdapter(imageViews));
     }
 
-    @Override
     public void initData() {
         String[] perms = {Manifest.permission.CAMERA};
         if (EasyPermissions.hasPermissions(this, perms)) {
-//            toMain(3000);
+            toMain(3000);
         } else {
-            EasyPermissions.requestPermissions(this, "camera", 0x11, perms);
+            EasyPermissions.requestPermissions(this, "请打开相机权限", 101, perms);
         }
     }
 
@@ -104,17 +102,20 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
-//        toMain();
+        toMain(0);
     }
 
     @Override
     public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
-
+        Log.e("22", "onPermissionsGranted: " );
     }
 
     @Override
     public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
-
+        Log.e("22", "onPermissionsDenied: " );
+        if (EasyPermissions.somePermissionDenied(this)){
+            new AppSettingsDialog.Builder(this).build().show();
+        }
     }
 
 }

@@ -44,7 +44,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void init(){
 
-        loadingFragment = new LoadingFragment();
+
 
 
     }
@@ -60,6 +60,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     public abstract void initData();
 
     public void showLoading(){
+        if (loadingFragment==null){
+            loadingFragment = new LoadingFragment();
+        }
         if (loadingFragment!=null&&!loadingFragment.isAdded()){
             loadingFragment.show(getSupportFragmentManager(),"");
         }

@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -17,12 +18,16 @@ import android.widget.TextView;
 import com.forwork.com.forwork.R;
 import com.forwork.com.forwork.ui.base.BaseActivity;
 import com.forwork.com.forwork.utils.StatusBarUtils;
+import com.forwork.com.forwork.view.dialog.LoadingDialog;
 
 import butterknife.BindView;
 
 public class WebActivity extends BaseActivity {
     @BindView(R.id.web_webview)
     WebView web_webview;
+
+    LoadingDialog loadingDialog;
+    private String TAG = "web";
 
     @Override
     public int getLayoutId() {
@@ -55,7 +60,7 @@ public class WebActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
+        loadingDialog = new LoadingDialog(this,R.style.loading_style);
     }
 
     @Override
@@ -68,32 +73,33 @@ public class WebActivity extends BaseActivity {
         webSettings.setAllowContentAccess(true);
         webSettings.setAppCacheEnabled(false);
         webSettings.setBuiltInZoomControls(false);
-        webSettings.setUseWideViewPort(true);
+//        webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
 
         WebViewClient webViewClient = new WebViewClient(){
+
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
                 return true;
             }
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                WebActivity.super.showLoading();
+                loadingDialog.show();
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                WebActivity.super.dismissLoading();
+                loadingDialog.dismiss();
             }
 
             @Override
             public void onLoadResource(WebView view, String url) {
                 super.onLoadResource(view, url);
-                view.loadUrl(url);
             }
 
             @Override
@@ -101,18 +107,27 @@ public class WebActivity extends BaseActivity {
                 super.onPageCommitVisible(view, url);
             }
         };
-        WebChromeClient webChromeClient = new WebChromeClient();
+        WebChromeClient webChromeClient = new WebChromeClient(){
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                super.onReceivedTitle(view, title);
+                toolbar_name.setText(title);
+            }
+        };
 
         web_webview.setWebViewClient(webViewClient);
         web_webview.setWebChromeClient(webChromeClient);
 
-        web_webview.loadUrl(getIntent().getStringExtra("url"));
+//        web_webview.loadUrl(getIntent().getStringExtra("url"));
+        web_webview.loadUrl("http://www.baidu.com");
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Log.e(TAG, "onKeyDown: "+web_webview.canGoBack() );
         if (web_webview.canGoBack()){
             web_webview.goBack();
+            return true;
         }
         return super.onKeyDown(keyCode, event);
 
