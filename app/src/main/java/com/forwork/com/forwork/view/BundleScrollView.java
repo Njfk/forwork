@@ -119,6 +119,7 @@ public class BundleScrollView extends RelativeLayout {
         title.layout(title_normal.left, title_normal.top, title_normal.right, title_normal.bottom);
         title_normal.setEmpty();
 
+        //貌似是由于这个动画移动是相对于自身移动，所以用（list.getTop()-list_normal.top, 0）作为Y轴移动坐标，具体也没搞太明白
         TranslateAnimation translateAnimation2 = new TranslateAnimation(0, 0,list.getTop()-list_normal.top, 0);
         translateAnimation2.setDuration(500);
         translateAnimation2.setFillAfter(false);

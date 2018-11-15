@@ -8,65 +8,75 @@
     <com.forwork.com.forwork.view.BundleScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:id="@+id/asdasdtitle"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:orientation="vertical"
-                android:background="@color/orange">
+                android:background="@color/orange"
+                android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_0"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:text="你看不到我" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_0"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:text="你看不到我" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_0"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:text="你看不到我" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_0"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
                     android:text="你看不到我"
-                    android:gravity="center_vertical"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/sp_15"
-                    android:layout_weight="1"/>
+                    android:textSize="@dimen/sp_15" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_0"
-                    android:text="账户：400元"
+                    android:layout_weight="1"
                     android:gravity="center_vertical"
+                    android:text="账户：400元"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/sp_15"
-                    android:layout_weight="1"/>
+                    android:textSize="@dimen/sp_15" />
             </LinearLayout>
+
             <RelativeLayout
                 android:id="@+id/header"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="@color/blue">
+
                 <ImageView
                     android:id="@+id/index_me_user_icon"
                     android:layout_width="@dimen/dp_40"
                     android:layout_height="@dimen/dp_40"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:layout_marginLeft="@dimen/dp_20"/>
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_10" />
             </RelativeLayout>
 
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/me_list_name"
+                android:layout_below="@id/asdasdtitle"
                 android:layout_marginTop="@dimen/dp_8"
-                android:layout_below="@id/asdasdtitle"/>
+                android:entries="@array/me_list_name" />
         </RelativeLayout>
 
     </com.forwork.com.forwork.view.BundleScrollView>
