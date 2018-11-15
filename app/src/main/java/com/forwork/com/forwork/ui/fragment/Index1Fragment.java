@@ -1,6 +1,7 @@
 package com.forwork.com.forwork.ui.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -108,7 +109,7 @@ public class Index1Fragment extends LazyFragment {
         // Inflate the layout for this fragment
         View inflate = inflater.inflate(R.layout.fragment_index1, container, false);
         ButterKnife.bind(this, inflate);
-        appCompatActivity = (AppCompatActivity) getActivity();
+
         iListView = (IListView) getActivity();
         isCreated = true;
         Log.e(TAG, "onCreateView: " + isCreated);
@@ -120,6 +121,8 @@ public class Index1Fragment extends LazyFragment {
     @Override
     protected void lazyLoad() {
         if (isCreated && isVisiable) {
+
+
             initData();
             isCreated = false;
             isVisiable = false;
@@ -128,6 +131,7 @@ public class Index1Fragment extends LazyFragment {
 
     @Override
     public void refresh() {
+        iListView.showDialog();
         list_page1 = 1;
         list_total1 = 1;
         products.clear();
@@ -140,6 +144,7 @@ public class Index1Fragment extends LazyFragment {
 
         iListView.showDialog();
 
+        appCompatActivity = (AppCompatActivity) getActivity();
         setHasOptionsMenu(true);
         appCompatActivity.setSupportActionBar(index_toolbar);
         //刷新事件
@@ -155,7 +160,7 @@ public class Index1Fragment extends LazyFragment {
         //晃动动画
         RotateAnimation rotateAnimation = new RotateAnimation(0, 10, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         rotateAnimation.setRepeatMode(Animation.REVERSE);
-        rotateAnimation.setDuration(300);
+        rotateAnimation.setDuration(500);
         rotateAnimation.setRepeatCount(Animation.INFINITE);
         rotateAnimation.setInterpolator(new CycleInterpolator(2));
 

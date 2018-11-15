@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.forwork.com.forwork.R;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     Bitmap bitmap2;
     private Paint mPaint;
+    private String TAG = "reader";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +69,13 @@ public class MainActivity extends AppCompatActivity {
 
         setBookBg(Config.createConfig(this).getBookBgType());
 
-        onDraw(pageWidget.getCurPage());
-        onDraw(pageWidget.getNextPage());
+        final Page page = new Page();
+        page.setNum(1);
+        onDraw(pageWidget.getCurPage(),page.getNum());
+        onDraw(pageWidget.getNextPage(),page.getNum());
 
         //必加触摸事件
+
         pageWidget.setTouchListener(new PageWidget.TouchListener() {
             @Override
             public void center() {
@@ -80,20 +85,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public Boolean prePage() {
 
+                Log.e(TAG, "prePage: " );
                 //返回true 表明存在上一页
+                if (page.getNum() ==1){
+                    return false;
+                }else {
+                    onDraw(pageWidget.getCurPage(),page.getNum() );
+                    onDraw(pageWidget.getNextPage(),page.getNum() -1);
+                    page.setNum(page.getNum() -1);
+                }
+
                 return true;
             }
 
             @Override
             public Boolean nextPage() {
-
-                //返回true 表明存在下一页
+                onDraw(pageWidget.getCurPage(),page.getNum() );
+                onDraw(pageWidget.getNextPage(),page.getNum() +1);
+                page.setNum(page.getNum() +1);
                 return true;
             }
 
             @Override
             public void cancel() {
-
             }
         });
 
@@ -101,10 +115,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     //绘制文字
-    public void onDraw(Bitmap bitmap) {
+    public void onDraw(Bitmap bitmap,int page) {
         List<String> m_lines = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            m_lines.add("测试文本****第"+i+"*****行");
+            m_lines.add("测试文本****第"+page+"页,第"+i+"*****行");
         }
 
         Canvas c = new Canvas(bitmap);
@@ -186,5 +200,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void setBgBitmap(Bitmap bgBitmap) {
         this.bitmap2 = bgBitmap;
+    }
+
+    class Page{
+        int num;
+
+        public int getNum() {
+            return num;
+        }
+
+        public void setNum(int num) {
+            this.num = num;
+        }
     }
 }

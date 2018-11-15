@@ -58,6 +58,8 @@ import com.forwork.com.forwork.ui.dialog.ScanDialogFragment;
 import com.forwork.com.forwork.ui.fragment.Index1Fragment;
 import com.forwork.com.forwork.ui.fragment.Index2Fragment;
 import com.forwork.com.forwork.ui.fragment.Index3Fragment;
+import com.forwork.com.forwork.ui.fragment.Index4Fragment;
+import com.forwork.com.forwork.ui.fragment.Index5Fragment;
 import com.forwork.com.forwork.utils.StatusBarUtils;
 import com.forwork.com.forwork.view.MarqueeTextView;
 import com.forwork.com.forwork.view.dialog.LoadingFragment;
@@ -97,6 +99,8 @@ public class IndexActivity extends BaseActivity implements IListView, View.OnCli
     Index1Fragment index1Fragment;
     Index2Fragment index2Fragment;
     Index3Fragment index3Fragment;
+    Index4Fragment index4Fragment;
+    Index5Fragment index5Fragment;
     private String TAG = "index";
 
     @Override
@@ -222,7 +226,7 @@ public class IndexActivity extends BaseActivity implements IListView, View.OnCli
 //        });
         RotateAnimation rotateAnimation = new RotateAnimation(0, 10, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         rotateAnimation.setRepeatMode(Animation.REVERSE);
-        rotateAnimation.setDuration(300);
+        rotateAnimation.setDuration(500);
         rotateAnimation.setRepeatCount(Animation.INFINITE);
         rotateAnimation.setInterpolator(new CycleInterpolator(2));
 
@@ -243,13 +247,13 @@ public class IndexActivity extends BaseActivity implements IListView, View.OnCli
         index1Fragment = new Index1Fragment();
         index2Fragment = new Index2Fragment();
         index3Fragment = new Index3Fragment();
+        index4Fragment = new Index4Fragment();
+        index5Fragment = new Index5Fragment();
         fragments.add(index1Fragment);
         fragments.add(index2Fragment);
         fragments.add(index3Fragment);
-//        fragments.add(index1Fragment);
-//        fragments.add(index1Fragment);
-//        fragments.add(index1Fragment);
-//        fragments.add(index1Fragment);
+        fragments.add(index4Fragment);
+        fragments.add(index5Fragment);
 
         indexPageAdapter = new IndexPageAdapter(getSupportFragmentManager(), fragments);
         index_viewpager.setAdapter(indexPageAdapter);

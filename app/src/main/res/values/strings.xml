@@ -1,8 +1,32 @@
 <resources>
     <string name="app_name">秀逗</string>
     <string name="forwork">为工作而生</string>
+    <string name="index_select_1">商城</string>
+    <string name="index_select_2">分类</string>
+    <string name="index_select_4">我的</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="application_limit">申请额度</string>
+
+
+    <string-array name="item_list_name">
+        <item>衣服</item>
+        <item>鞋子</item>
+        <item>衣服</item>
+        <item>衣服</item>
+        <item>衣服</item>
+        <item>衣服</item>
+        <item>衣服</item>
+        <item>衣服</item>
+    </string-array>
+    <string-array name="me_list_name">
+        <item>提款</item>
+        <item>个人中心</item>
+        <item>服务升级</item>
+        <item>我的钱包</item>
+        <item>我的订单</item>
+        <item>检查升级</item>
+        <item>客服中心</item>
+    </string-array>
 </resources>

@@ -46,7 +46,7 @@ public class SplashActivity extends AppCompatActivity implements EasyPermissions
     }
 
     public void initView() {
-        StatusBarUtils.setColor(this, getResources().getColor(R.color.white));
+        StatusBarUtils.setColor(this, getResources().getColor(R.color.color_ff8a00));
         int[] imgs = new int[]{
                 R.drawable.navigation_1,
                 R.drawable.navigation_2,
