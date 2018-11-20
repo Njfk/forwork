@@ -52,7 +52,7 @@
             android:button="@null"
             android:drawableTop="@drawable/index_make_money_selector"
             android:gravity="center"
-            android:text="商城"
+            android:text="@string/index_select_3"
             android:textSize="@dimen/sp_9" />
 
         <ImageView

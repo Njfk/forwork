@@ -9,8 +9,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -43,8 +45,10 @@ import com.forwork.com.forwork.ui.adapter.IndexList1Adapter;
 import com.forwork.com.forwork.ui.adapter.OnRecycleViewItemClick;
 import com.forwork.com.forwork.ui.base.LazyFragment;
 import com.forwork.com.forwork.ui.dialog.ScanDialogFragment;
+import com.forwork.com.forwork.ui.fragment.adapter.Index1StaggeredGridAdapter;
 import com.forwork.com.forwork.view.MarqueeTextView;
 import com.forwork.com.forwork.view.PriceText;
+import com.forwork.com.forwork.view.SpaceItemDecoration;
 import com.forwork.com.forwork.view.refresh.MRefreshFooter;
 import com.forwork.com.forwork.view.refresh.MRefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -72,6 +76,8 @@ public class Index1Fragment extends LazyFragment {
     ViewPager index_bunner_viewpager;
     @BindView(R.id.index_list_1)
     RecyclerView index_list_1;
+    @BindView(R.id.index_list_2)
+    RecyclerView index_list_2;
     @BindView(R.id.index_marquee_text)
     MarqueeTextView index_marquee_text;
     @BindView(R.id.index_seek_bar)
@@ -84,6 +90,7 @@ public class Index1Fragment extends LazyFragment {
     ListApiPresenter listApiPresenter;
 
     IndexList1Adapter indexList1Adapter;
+    Index1StaggeredGridAdapter index1StaggeredGridAdapter;
     AppCompatActivity appCompatActivity;
 
     int list_page1 = 1;
@@ -136,6 +143,7 @@ public class Index1Fragment extends LazyFragment {
         list_total1 = 1;
         products.clear();
         indexList1Adapter.notifyDataSetChanged();
+        index1StaggeredGridAdapter.notifyDataSetChanged();
         listApiPresenter.getList1(list_page1);
     }
 
@@ -207,6 +215,13 @@ public class Index1Fragment extends LazyFragment {
         });
         index_list_1.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         index_list_1.setAdapter(indexList1Adapter);
+
+        //list2
+        index1StaggeredGridAdapter = new Index1StaggeredGridAdapter(products,getActivity());
+        index_list_2.addItemDecoration(new SpaceItemDecoration(8));
+        index_list_2.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        index_list_2.setAdapter(index1StaggeredGridAdapter);
+
         final int[] state_list1 = new int[1];
         final int[] lastVisibleItemPosition = {0};
         index_list_1.setOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -300,6 +315,7 @@ public class Index1Fragment extends LazyFragment {
             products.addAll(indexBean1.getData().getItems());
         }
         indexList1Adapter.notifyDataSetChanged();
+        index1StaggeredGridAdapter.notifyDataSetChanged();
     }
 
 

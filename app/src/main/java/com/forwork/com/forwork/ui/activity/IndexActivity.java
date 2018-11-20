@@ -39,9 +39,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 //import com.bumptech.glide.Glide;
-//import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.forwork.com.forwork.R;
 import com.forwork.com.forwork.bean.IndexBean1;
 import com.forwork.com.forwork.bean.base.Product;
@@ -262,7 +259,7 @@ public class IndexActivity extends BaseActivity implements IListView, View.OnCli
         index_viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+                index2Fragment.dismissPop();
             }
 
             @Override
@@ -355,5 +352,7 @@ public class IndexActivity extends BaseActivity implements IListView, View.OnCli
         }
         return super.onPrepareOptionsPanel(view, menu);
     }
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    }
 }

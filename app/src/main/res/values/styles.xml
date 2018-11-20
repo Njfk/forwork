@@ -39,6 +39,10 @@
         <item name="android:windowEnterAnimation">@anim/dialog_enter_scale_0_100</item>
         <item name="android:windowExitAnimation">@anim/dialog_enter_scale_100_0</item>
     </style>
+    <style name="scale_anim">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter_scale_0_100_y</item>
+        <item name="android:windowExitAnimation">@anim/dialog_enter_scale_100_0_y</item>
+    </style>
     <style name="dialog_anim_r_to_l">
         <item name="android:windowEnterAnimation">@anim/slide_r_to_l</item>
         <item name="android:windowExitAnimation">@anim/slide_l_to_r</item>

@@ -16,13 +16,32 @@
         app:contentInsetLeft="0dp"
         app:contentInsetStart="0dp">
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="分类"
-            android:textSize="@dimen/sp_15" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="分类"
+                android:textSize="@dimen/sp_15" />
+
+            <ImageView
+                android:id="@+id/ishowpop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:src="@drawable/glass"
+                android:layout_alignParentRight="true"
+                android:text="分类"
+                android:textSize="@dimen/sp_15" />
+        </RelativeLayout>
+
+
     </android.support.v7.widget.Toolbar>
+
 
     <LinearLayout
         android:layout_width="match_parent"

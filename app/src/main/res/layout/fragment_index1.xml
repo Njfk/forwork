@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <ScrollView
+        <com.forwork.com.forwork.view.ScrollViewForRecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -182,7 +182,12 @@
                     android:background="@drawable/white_bg_shape"
                     android:paddingLeft="@dimen/dp_4"
                     android:paddingRight="@dimen/dp_4" />
-
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/index_list_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:touchscreenBlocksFocus="false"
+                    android:layout_below="@id/index_list_1"/>
 
                 <ImageView
                     android:id="@+id/index_shar"
@@ -198,7 +203,7 @@
             </RelativeLayout>
 
 
-        </ScrollView>
+        </com.forwork.com.forwork.view.ScrollViewForRecyclerView>
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </RelativeLayout>

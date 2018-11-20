@@ -27,6 +27,7 @@ public class BundleScrollView extends RelativeLayout {
     ViewGroup title;
     ViewGroup list;
     private String TAG = "BundleScrollView";
+    private int v;
 
     public BundleScrollView(Context context) {
         super(context);
@@ -55,7 +56,7 @@ public class BundleScrollView extends RelativeLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-
+        boolean isClick = false;
         if (header != null && title != null && list != null) {
             switch (ev.getAction()) {
                 case MotionEvent.ACTION_DOWN:
@@ -76,28 +77,28 @@ public class BundleScrollView extends RelativeLayout {
                     }
 
                     float y = ev.getY();
-                    int v = (int) (downY - y) / 4;
+                     v = (int) (downY - y) / 4;
                     downY = y;
 
                     if (v <= header.getHeight() / 2) {
                         title.layout(title.getLeft(), title.getTop() - v, title.getRight(), title.getBottom() - v);
                     }
                     if (v <= header.getHeight() / 2) {
-                        Log.e(TAG, "onTouchEvent: "+(list.getTop() - v) +"----"+(list.getBottom() - v));
+                        Log.e(TAG, "onTouchEvent: " + (list.getTop() - v) + "----" + (list.getBottom() - v));
                         list.layout(list.getLeft(), list.getTop() - v, list.getRight(), list.getBottom() - v);
                     }
+
                     break;
 
 
                 case MotionEvent.ACTION_UP:
-                    if (!total_normal.isEmpty()&&!list_normal.isEmpty()&&!title_normal.isEmpty()) {
+                    if (!total_normal.isEmpty() && !list_normal.isEmpty() && !title_normal.isEmpty()) {
                         resetAnimotion();
                     }
                     break;
             }
         }
-
-        return true;
+            return true;
     }
 
     @Override
@@ -107,7 +108,7 @@ public class BundleScrollView extends RelativeLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return true;
+        return false;
     }
 
     public void resetAnimotion() {
@@ -120,7 +121,7 @@ public class BundleScrollView extends RelativeLayout {
         title_normal.setEmpty();
 
         //貌似是由于这个动画移动是相对于自身移动，所以用（list.getTop()-list_normal.top, 0）作为Y轴移动坐标，具体也没搞太明白
-        TranslateAnimation translateAnimation2 = new TranslateAnimation(0, 0,list.getTop()-list_normal.top, 0);
+        TranslateAnimation translateAnimation2 = new TranslateAnimation(0, 0, list.getTop() - list_normal.top, 0);
         translateAnimation2.setDuration(500);
         translateAnimation2.setFillAfter(false);
         translateAnimation2.setInterpolator(new BounceInterpolator());

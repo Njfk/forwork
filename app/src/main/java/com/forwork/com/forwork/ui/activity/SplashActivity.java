@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.forwork.com.forwork.R;
 import com.forwork.com.forwork.ui.adapter.IndexBunnerAdapter;
 import com.forwork.com.forwork.ui.base.BaseActivity;
@@ -56,8 +58,7 @@ public class SplashActivity extends AppCompatActivity implements EasyPermissions
         for (int i = 0;i<imgs.length;i++){
 
             ImageView imageView = new ImageView(this);
-            imageView.setImageResource(imgs[i]);
-
+            Glide.with(this).asBitmap().apply(new RequestOptions().override(getResources().getDisplayMetrics().widthPixels,getResources().getDisplayMetrics().heightPixels)).load(imgs[i]).into(imageView);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
 

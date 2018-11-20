@@ -3,6 +3,7 @@ package com.forwork.com.forwork.ui.base;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
+import android.util.Log;
 
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
@@ -12,12 +13,14 @@ import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 public class App extends MultiDexApplication {
     private static App application;
+    private String TAG = "app";
 
     @Override
     public void onCreate() {
         super.onCreate();
-        ZXingLibrary.initDisplayOpinion(this);
         application = this;
+        ZXingLibrary.initDisplayOpinion(this);
+
     }
 
     @Override

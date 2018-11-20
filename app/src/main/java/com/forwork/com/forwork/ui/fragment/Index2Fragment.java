@@ -7,15 +7,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.forwork.com.forwork.R;
 import com.forwork.com.forwork.ui.base.LazyFragment;
 import com.forwork.com.forwork.ui.dialog.LoginDialog;
+import com.forwork.com.forwork.ui.dialog.popwindow.ScreenPop;
 import com.forwork.com.forwork.ui.fragment.department.Index2Depart1Fragment;
 import com.forwork.com.forwork.ui.fragment.department.Index2Depart2Fragment;
 import com.forwork.com.forwork.view.dialog.LoadingDialog;
@@ -27,16 +31,19 @@ import butterknife.ButterKnife;
  * A simple {@link Fragment} subclass.
  */
 public class Index2Fragment extends LazyFragment {
-//    @BindView(R.id.index2_toolbar)
-//    Toolbar toolbar;
+    @BindView(R.id.index2_toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.ishowpop)
+    ImageView ishowpop;
     @BindView(R.id.index2_list_item)
     ListView listView;
     boolean isCreated = false;
     Handler handler = new Handler();
-    AppCompatActivity appCompatActivity;
 
     Index2Depart1Fragment index2Depart1Fragment;
     Index2Depart2Fragment index2Depart2Fragment;
+    ScreenPop pop;
+    private String TAG = "index2Fragment";
 
     public Index2Fragment() {
         // Required empty public constructor
@@ -49,7 +56,6 @@ public class Index2Fragment extends LazyFragment {
         // Inflate the layout for this fragment
         View inflate = inflater.inflate(R.layout.fragment_index2, container, false);
         ButterKnife.bind(this, inflate);
-        appCompatActivity = (AppCompatActivity) getActivity();
         isCreated = true;
         lazyLoad();
         return inflate;
@@ -92,11 +98,30 @@ public class Index2Fragment extends LazyFragment {
                 }
             });
 
+
+            ishowpop.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (pop==null){
+                        pop = new ScreenPop(getActivity());
+                    }
+                    Log.e(TAG, "onClick: "+pop.isShowing() );
+                    if (!pop.isShowing()){
+                        pop.showAsDropDown(toolbar,0,0);
+                    }
+                }
+            });
         }
     }
 
     @Override
     public void refresh() {
 
+    }
+
+    public void dismissPop(){
+        if (pop!=null){
+            pop.dismiss();
+        }
     }
 }
