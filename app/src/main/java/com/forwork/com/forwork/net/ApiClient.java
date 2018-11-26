@@ -15,6 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
     public static ApiClient apiClient;
     private Retrofit retrofit;
+    private Retrofit mMusciRetrofit;
     private String TAG = "http";
 
     public static ApiClient getInstance(){
@@ -42,6 +43,24 @@ public class ApiClient {
                     .build();
         }
         return retrofit;
+    }
+    public Retrofit getMusicClient(){
+        if (mMusciRetrofit == null){
+            OkHttpClient.Builder builder = new OkHttpClient.Builder();
+            builder.addInterceptor(new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+                @Override
+                public void log(String message) {
+                    Log.e("Music", "log: "+message );
+                }
+            }).setLevel(HttpLoggingInterceptor.Level.BASIC));
+            mMusciRetrofit = new Retrofit.Builder()
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .client(builder.build())
+                    .baseUrl("http://218.200.160.29/")
+                    .build();
+        }
+        return mMusciRetrofit;
     }
 
 

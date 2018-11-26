@@ -4,11 +4,24 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.forwork.com.forwork.ui.fragment.department.Index3Depart1Fragment">
+<com.forwork.com.forwork.view.ScrollViewForRecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
    <android.support.v4.view.ViewPager
        android:id="@+id/index3Depart1Viewpager"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"/>
-
+       android:layout_height="200dp"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/index3Depart1Seesion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/index3Depart1Viewpager"/>
+    </RelativeLayout>
+</com.forwork.com.forwork.view.ScrollViewForRecyclerView>
 </LinearLayout>

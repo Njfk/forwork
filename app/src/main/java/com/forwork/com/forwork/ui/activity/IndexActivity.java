@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
@@ -35,6 +37,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +60,9 @@ import com.forwork.com.forwork.ui.fragment.Index2Fragment;
 import com.forwork.com.forwork.ui.fragment.Index3Fragment;
 import com.forwork.com.forwork.ui.fragment.Index4Fragment;
 import com.forwork.com.forwork.ui.fragment.Index5Fragment;
+import com.forwork.com.forwork.ui.fragment.department.Index3Depart3Fragment;
+import com.forwork.com.forwork.ui.service.MusicService;
+import com.forwork.com.forwork.ui.service.Player;
 import com.forwork.com.forwork.utils.StatusBarUtils;
 import com.forwork.com.forwork.view.MarqueeTextView;
 import com.forwork.com.forwork.view.dialog.LoadingFragment;
@@ -69,6 +75,7 @@ import com.scwang.smartrefresh.layout.constant.RefreshState;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -118,7 +125,6 @@ public class IndexActivity extends BaseActivity implements IListView, View.OnCli
     @Override
     public void initView() {
 
-//
 //        showLoading();
 //
 //

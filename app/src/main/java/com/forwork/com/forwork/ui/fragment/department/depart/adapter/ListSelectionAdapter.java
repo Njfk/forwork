@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.forwork.com.forwork.R;
 import com.forwork.com.forwork.ui.fragment.department.depart.bean.Selection;
 
@@ -32,18 +33,20 @@ public class ListSelectionAdapter extends RecyclerView.Adapter<ListSelectionAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View inflate = inflater.inflate(R.layout.item_selection, parent, false);
 
-        return null;
+        return new ViewHolder(inflate);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        Glide.with(context).asBitmap().load(selections.get(position).getId()).into(holder.imageView);
+        holder.title.setText(position+"");
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return selections.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

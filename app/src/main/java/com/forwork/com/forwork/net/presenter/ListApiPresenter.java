@@ -37,6 +37,7 @@ public class ListApiPresenter extends BasePresenter<IListView>{
             @Override
             public void onError(Throwable t) {
                 iBaseView.error(0);
+                onComplete();
             }
 
             @Override

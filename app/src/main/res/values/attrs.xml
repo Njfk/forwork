@@ -3,5 +3,8 @@
     <declare-styleable name="price_title">
         <attr name="textSize" format="dimension"></attr>
     </declare-styleable>
+    <declare-styleable name="SessionContentTextView">
+        <attr name="m_limit_lines" format="integer"></attr>
+    </declare-styleable>
 
 </resources>

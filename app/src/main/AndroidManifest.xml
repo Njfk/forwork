@@ -7,18 +7,16 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
-        tools:replace="android:allowBackup"
+        android:name=".ui.base.App2"
         android:allowBackup="true"
         android:icon="@mipmap/logo_gj"
         android:label="@string/app_name"
-        android:name=".ui.base.App2"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup">
         <activity android:name=".MainActivity" />
-        <activity android:name=".ui.activity.IndexActivity">
-
-        </activity>
+        <activity android:name=".ui.activity.IndexActivity" />
         <activity android:name=".ui.activity.WebActivity" />
         <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
@@ -27,8 +25,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".reader.MainActivity" />
+        <activity android:name=".ui.activity.MusicActivity" />
+        <activity
+            android:name=".ui.activity.LockActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:theme="@style/LockScreenBase"
+            android:noHistory="false"/>
 
-        <activity android:name=".reader.MainActivity"></activity>
+        <service
+            android:name=".ui.service.MusicService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
