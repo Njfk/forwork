@@ -55,4 +55,13 @@
         android:layout_height="@dimen/dp_30"
         android:layout_centerVertical="true"
         android:src="@drawable/ic_ol_play_onpic" />
+
+    <ImageView
+        android:id="@+id/notification_colse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:padding="@dimen/dp_5"
+        android:src="@drawable/notification_close" />
+
 </RelativeLayout>

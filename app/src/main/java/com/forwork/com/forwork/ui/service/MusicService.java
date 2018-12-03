@@ -30,7 +30,7 @@ public class MusicService extends Service {
     PlayReceiver playReceiver;
     NotificationManager mNofiticationManger;
     Notification notification;
-    MyBinder myBinder = new MyBinder();
+//    MyBinder myBinder = new MyBinder();
     private String url;
     private String TAG = "musicService";
     private String name = "";
@@ -38,14 +38,14 @@ public class MusicService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
-        return myBinder;
+        return null;
     }
-
-    public class MyBinder extends Binder {
-        public MusicService getService() {
-            return MusicService.this;
-        }
-    }
+//
+//    public class MyBinder extends Binder {
+//        public MusicService getService() {
+//            return MusicService.this;
+//        }
+//    }
 
     @Override
     public void onCreate() {
@@ -66,6 +66,7 @@ public class MusicService extends Service {
         play_filter.addAction("play");
         play_filter.addAction("pause");
         play_filter.addAction("next");
+        play_filter.addAction("stop");
         bindLockScreen = new BindLockScreen();
         playReceiver = new PlayReceiver();
         showNotification();
@@ -86,6 +87,9 @@ public class MusicService extends Service {
         Intent next = new Intent("next");
         PendingIntent next_intent = PendingIntent.getBroadcast(this, 0, next, 0);
         remoteView.setOnClickPendingIntent(R.id.notification_next, next_intent);
+        Intent stop = new Intent("stop");
+        PendingIntent stop_intent = PendingIntent.getBroadcast(this, 0, stop, 0);
+        remoteView.setOnClickPendingIntent(R.id.notification_colse, stop_intent);
 
 
         notification.contentView = remoteView;
@@ -107,7 +111,8 @@ public class MusicService extends Service {
 
     @Override
     public void onDestroy() {
-        registerReceiver(bindLockScreen, filter);
+        unregisterReceiver(bindLockScreen);
+        unregisterReceiver(playReceiver);
         super.onDestroy();
     }
 
@@ -172,6 +177,10 @@ public class MusicService extends Service {
                 pause();
             } else if (action.equals("next")) {
 
+            }else if (action.equals("stop")){
+                mNofiticationManger.cancel(100);
+                stop();
+                stopSelf();
             }
         }
     }

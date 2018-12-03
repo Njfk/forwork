@@ -4,6 +4,7 @@ package com.forwork.com.forwork.ui.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -32,6 +33,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 import com.forwork.com.forwork.R;
 import com.forwork.com.forwork.bean.IndexBean1;
 import com.forwork.com.forwork.bean.base.Product;
@@ -75,7 +77,7 @@ public class Index1Fragment extends LazyFragment {
     @BindView(R.id.index_bunner_viewpager)
     ViewPager index_bunner_viewpager;
     @BindView(R.id.index_list_1)
-    RecyclerView index_list_1;
+    ShimmerRecyclerView index_list_1;
     @BindView(R.id.index_list_2)
     RecyclerView index_list_2;
     @BindView(R.id.index_marquee_text)
@@ -130,7 +132,13 @@ public class Index1Fragment extends LazyFragment {
         if (isCreated && isVisiable) {
 
 
-            initData();
+           Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    initData();
+                }
+            },2000);
             isCreated = false;
             isVisiable = false;
         }
@@ -215,7 +223,7 @@ public class Index1Fragment extends LazyFragment {
         });
         index_list_1.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         index_list_1.setAdapter(indexList1Adapter);
-
+        index_list_1.showShimmerAdapter();
         //list2
         index1StaggeredGridAdapter = new Index1StaggeredGridAdapter(products,getActivity());
         index_list_2.addItemDecoration(new SpaceItemDecoration(8));
@@ -316,6 +324,7 @@ public class Index1Fragment extends LazyFragment {
         }
         indexList1Adapter.notifyDataSetChanged();
         index1StaggeredGridAdapter.notifyDataSetChanged();
+        index_list_1.hideShimmerAdapter();
     }
 
 
