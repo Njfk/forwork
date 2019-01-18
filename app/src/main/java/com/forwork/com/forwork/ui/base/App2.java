@@ -1,6 +1,9 @@
 package com.forwork.com.forwork.ui.base;
 
 import android.app.Application;
+import android.os.Handler;
+import android.os.Looper;
+
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 /**
@@ -10,7 +13,7 @@ import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 public class App2 extends Application {
     private static App2 application;
     private String TAG = "app";
-
+    private static Handler handler;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -35,5 +38,12 @@ public class App2 extends Application {
 
     public static App2 getApplication() {
         return application;
+    }
+    public static Handler getHandler(){
+        if (handler == null){
+            handler = new Handler(Looper.getMainLooper());
+        }
+        return handler;
+
     }
 }
