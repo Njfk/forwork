@@ -31,17 +31,17 @@ public abstract class LoadingPage extends FrameLayout {
     private int status = LODING;
 
     private int error_res;
-    private int emp_res;
+    private int loading_res;
     private int success_res;
 
     private View error_view;
-    private View emp_view;
+    private View loading_view;
     private View success_view;
 
     public LoadingPage(Context context, @LayoutRes int error,@LayoutRes int emp){
         super(context);
         this.error_res = error;
-        this.emp_res = emp;
+        this.loading_res = emp;
         init();
     }
 
@@ -57,9 +57,9 @@ public abstract class LoadingPage extends FrameLayout {
         }
 
 
-        emp_view = createLODINGView();
-        if (emp_view!=null){
-            addView(emp_view,new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        loading_view = createLodingView();
+        if (loading_view!=null){
+            addView(loading_view,new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         }
 
         showPage();
@@ -72,25 +72,28 @@ public abstract class LoadingPage extends FrameLayout {
         return error_view;
     }
 
-    private View createLODINGView(){
-        if (emp_res != 0){
-            emp_view = ViewUtils.inflate(emp_res);
+    private View createLodingView(){
+        if (loading_res != 0){
+            loading_view = ViewUtils.inflate(loading_res);
         }
-        return emp_view;
+        return loading_view;
     }
 
+    //加载中...
     public void loading(){
         Log.e(TAG, "loading: " );
         status = LODING;
         showPage();
     }
 
+    //加载完成...
     public void complete(){
         Log.e(TAG, "complete: " );
         status = SUCCESS;
         showPage();
     }
 
+    //加载失败...
     public void error(){
         Log.e(TAG, "error: " );
         status = ERROR_PAGE;
@@ -102,8 +105,8 @@ public abstract class LoadingPage extends FrameLayout {
         if (error_view!=null){
             error_view.setVisibility(status == LODING||status == SUCCESS?GONE:VISIBLE);
         }
-        if (emp_view !=null){
-            emp_view.setVisibility(status == ERROR_PAGE||status == SUCCESS?GONE:VISIBLE);
+        if (loading_view !=null){
+            loading_view.setVisibility(status == ERROR_PAGE||status == SUCCESS?GONE:VISIBLE);
         }
         if (success_view !=null){
             success_view.setVisibility(status == ERROR_PAGE||status == LODING?GONE:VISIBLE);
