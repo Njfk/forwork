@@ -125,7 +125,7 @@ public class MusicService extends Service {
             notification.contentView.setImageViewResource(R.id.notification_pause, R.drawable.ic_notifaction_pause);
             mNofiticationManger.notify(100, notification);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         Log.e(TAG, "play: ");

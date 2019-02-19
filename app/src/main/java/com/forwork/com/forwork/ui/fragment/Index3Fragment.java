@@ -70,13 +70,14 @@ public class Index3Fragment extends LazyFragment {
             fragments.add(new Index3Depart2Fragment());
             fragments.add(new Index3Depart3Fragment());
             fragments.add(new Index3Depart3Fragment());
-            fragments.add(new Index3Depart3Fragment());
-            fragments.add(new Index3Depart3Fragment());
-            fragments.add(new Index3Depart3Fragment());
-            fragments.add(new Index3Depart3Fragment());
-            fragments.add(new Index3Depart3Fragment());
-            fragments.add(new Index3Depart3Fragment());
+//            fragments.add(new Index3Depart3Fragment());
+//            fragments.add(new Index3Depart3Fragment());
+//            fragments.add(new Index3Depart3Fragment());
+//            fragments.add(new Index3Depart3Fragment());
+//            fragments.add(new Index3Depart3Fragment());
+//            fragments.add(new Index3Depart3Fragment());
 
+            index3_viewpager.setOffscreenPageLimit(5);
             index3PagerAdapter = new Index3PagerAdapter(fragments,titles,getChildFragmentManager());
             index3_viewpager.setAdapter(index3PagerAdapter);
             index3_tab.setupWithViewPager(index3_viewpager);

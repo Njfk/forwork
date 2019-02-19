@@ -3,6 +3,7 @@ package com.forwork.com.forwork.ui.fragment.department;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,8 +36,8 @@ import butterknife.ButterKnife;
  */
 public class Index3Depart3Fragment extends LazyFragment implements IMusicView {
     private static final String TAG = "Index3Depart3";
-    public static String music = "http://abv.cn/music/光辉岁月.mp3";
-    public static String music_name = "光辉岁月.mp3";
+    public static String music = "http://www.ytmp3.cn/down/58408.mp3";
+    public static String music_name = "测试.mp3";
     @BindView(R.id.index3Depart3List1)
     RecyclerView index3Depart3List1;
     boolean isCreated = false;
@@ -61,12 +62,20 @@ public class Index3Depart3Fragment extends LazyFragment implements IMusicView {
         ButterKnife.bind(this, inflate);
         appCompatActivity = (BaseActivity) getActivity();
         isCreated = true;
+        Log.e(TAG, "onCreateView: "+isCreated+isVisiable );
         initView();
         return inflate;
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+    }
+
+    @Override
     protected void lazyLoad() {
+        Log.e(TAG, "lazyLoad: "+isCreated+isVisiable );
         if (isVisiable && isCreated) {
             init();
 
@@ -138,12 +147,14 @@ public class Index3Depart3Fragment extends LazyFragment implements IMusicView {
 
     @Override
     public void showDialog() {
+        if (appCompatActivity!=null)
         appCompatActivity.showLoading();
     }
 
     @Override
     public void dismissDialog() {
-        appCompatActivity.dismissLoading();
+        if (appCompatActivity!=null)
+            appCompatActivity.dismissLoading();
 
     }
 

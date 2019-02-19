@@ -119,7 +119,7 @@ public class WebActivity extends BaseActivity {
         web_webview.setWebChromeClient(webChromeClient);
 
 //        web_webview.loadUrl(getIntent().getStringExtra("url"));
-        web_webview.loadUrl("http://www.baidu.com");
+        web_webview.loadUrl("https://www.sogou.com/sie?hdq=AQxRG-0000&query=webview%20%E6%8F%90%E7%A4%BAwebpage%20not%20availabel&ie=utf8");
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.RotateAnimation;
@@ -51,6 +53,7 @@ import com.forwork.com.forwork.ui.fragment.adapter.Index1StaggeredGridAdapter;
 import com.forwork.com.forwork.view.MarqueeTextView;
 import com.forwork.com.forwork.view.PriceText;
 import com.forwork.com.forwork.view.SpaceItemDecoration;
+import com.forwork.com.forwork.view.dialog.DropWindow;
 import com.forwork.com.forwork.view.refresh.MRefreshFooter;
 import com.forwork.com.forwork.view.refresh.MRefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -59,6 +62,8 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -97,10 +102,24 @@ public class Index1Fragment extends LazyFragment {
 
     int list_page1 = 1;
     int list_total1 = 1;
-
+    final int[] index = {0};
     IListView iListView;
 
     boolean isCreated = false;
+
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case -1:
+                    int position =index[0]%(bunners.size())  ;
+                    index_bunner_viewpager.setCurrentItem(position);
+                    break;
+            }
+        }
+    };
+    private ArrayList<ImageView> bunners;
 
     public static Index1Fragment newInstance() {
 
@@ -182,7 +201,7 @@ public class Index1Fragment extends LazyFragment {
 
         index_shake.startAnimation(rotateAnimation);
         //viewpager
-        final List<ImageView> bunners = new ArrayList<>();
+         bunners = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             ImageView imageView = new ImageView(getActivity());
             Glide.with(this).load("http://image.51huihuahua.com/activity/1531301867266.png")
@@ -209,6 +228,19 @@ public class Index1Fragment extends LazyFragment {
 
             }
         });
+
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                index[0]++;
+                Message message = handler.obtainMessage();
+                message.what = -1;
+                handler.sendMessage(message);
+
+            }
+        },1500,2500);
 
 
         //list1
@@ -347,10 +379,17 @@ public class Index1Fragment extends LazyFragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    DropWindow dropWindow;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.e("22", "onOptionsItemSelected: ");
         switch (item.getItemId()) {
+            case R.id.item_index_drop:
+
+                if (dropWindow==null){
+                    dropWindow = new DropWindow(getActivity());
+                }
+                dropWindow.showAsDropDown(index_toolbar);
+                break;
             case R.id.item_index_scan:
                 ScanDialogFragment scanDialogFragment = ScanDialogFragment.newInstance();
                 scanDialogFragment.show(getActivity().getSupportFragmentManager(), "");

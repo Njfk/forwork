@@ -2,10 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
+    <item android:id="@+id/item_index_drop"
+        android:title=""
+        android:icon="@android:drawable/btn_dropdown"
+        app:showAsAction="always"/>
     <item android:id="@+id/item_index_scan"
         android:title=""
         android:icon="@drawable/scan"
         app:showAsAction="always"/>
+
     <item android:id="@+id/item_index_read"
         android:title="阅读"
         android:icon="@drawable/book"

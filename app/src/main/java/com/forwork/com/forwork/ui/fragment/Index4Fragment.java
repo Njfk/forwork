@@ -64,7 +64,6 @@ public class Index4Fragment extends Fragment {
                 ViewUtils.runOnUIThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.e("--", "run: "+i[0]  );
                         if (i[0] ==-1){
                             loadingPage.error();
                         }else if (i[0] == 0){
