@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.forwork.com.forwork.R;
 import com.forwork.com.forwork.bean.MusicList;
@@ -40,6 +42,8 @@ public class Index3Depart3Fragment extends LazyFragment implements IMusicView {
     public static String music_name = "测试.mp3";
     @BindView(R.id.index3Depart3List1)
     RecyclerView index3Depart3List1;
+    @BindView(R.id.change_layout)
+    TextView change_layout;
     boolean isCreated = false;
     MusicPresenter musicPresenter;
     MusicListAdapter musicListAdapter;
@@ -134,6 +138,20 @@ public class Index3Depart3Fragment extends LazyFragment implements IMusicView {
                     LinearLayoutManager lm = (LinearLayoutManager) (layoutManager);
 
                     lastVisibleItemPosition[0] = lm.findLastVisibleItemPosition();
+                }
+            }
+        });
+
+        final boolean[] isGrid = {false};
+        change_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isGrid[0]){
+                    index3Depart3List1.setLayoutManager(new GridLayoutManager(getActivity(),2));
+                    isGrid[0] = true;
+                }else {
+                    index3Depart3List1.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+                    isGrid[0] = false;
                 }
             }
         });
