@@ -1,12 +1,17 @@
 package com.forwork.com.forwork;
 
 import android.os.Handler;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.forwork.com.forwork.bean.base.Book;
 import com.forwork.com.forwork.ui.base.BaseActivity;
 import com.forwork.com.forwork.ui.dialog.LoginDialog;
 import com.forwork.com.forwork.ui.dialog.MyDialog;
+
+import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity {
 

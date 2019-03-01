@@ -45,6 +45,7 @@ import android.widget.Toast;
 //import com.bumptech.glide.Glide;
 import com.forwork.com.forwork.R;
 import com.forwork.com.forwork.bean.IndexBean1;
+import com.forwork.com.forwork.bean.base.Book;
 import com.forwork.com.forwork.bean.base.Product;
 import com.forwork.com.forwork.net.ListApi;
 import com.forwork.com.forwork.net.presenter.ListApiPresenter;
@@ -281,7 +282,6 @@ public class IndexActivity extends BaseActivity implements IListView, View.OnCli
 
             }
         });
-
 
     }
 

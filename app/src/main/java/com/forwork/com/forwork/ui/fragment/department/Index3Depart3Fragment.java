@@ -171,8 +171,7 @@ public class Index3Depart3Fragment extends LazyFragment implements IMusicView {
 
     @Override
     public void dismissDialog() {
-        if (appCompatActivity!=null)
-            appCompatActivity.dismissLoading();
+
 
     }
 
@@ -191,5 +190,7 @@ public class Index3Depart3Fragment extends LazyFragment implements IMusicView {
         }
 
         musicListAdapter.notifyDataSetChanged();
+        if (appCompatActivity!=null)
+            appCompatActivity.dismissLoading();
     }
 }

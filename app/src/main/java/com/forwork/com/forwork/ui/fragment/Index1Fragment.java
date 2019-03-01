@@ -38,6 +38,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 import com.forwork.com.forwork.R;
 import com.forwork.com.forwork.bean.IndexBean1;
+import com.forwork.com.forwork.bean.base.Book;
 import com.forwork.com.forwork.bean.base.Product;
 import com.forwork.com.forwork.net.presenter.ListApiPresenter;
 import com.forwork.com.forwork.net.view.IListView;
@@ -200,6 +201,18 @@ public class Index1Fragment extends LazyFragment {
         rotateAnimation.setInterpolator(new CycleInterpolator(2));
 
         index_shake.startAnimation(rotateAnimation);
+        index_shake.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Book book = new Book();
+                book.setId(1);
+                book.setName("zhang");
+                Intent intent = new Intent(getActivity(), com.forwork.com.forwork.MainActivity.class);
+                intent.putExtra("book",book);
+                startActivity(intent);
+
+            }
+        });
         //viewpager
          bunners = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
